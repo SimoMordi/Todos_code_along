@@ -1,19 +1,20 @@
-import Todo from "./Todo";
+import Todo from "../Todo"
 
-const TodoList = ({
+
+export default function TodoList({
   todos,
   addTodo,
   completeTodo,
   editTodoText,
   deleteTodo
-}) => {
+}) {
   return (
     <>
       <h1>Create Todo</h1>
       <input
         type="text"
-        onKeyDown={e => {
-          e.key === "Enter" && addTodo(e);
+        onKeyDown={(e) => {
+          e.key === "Enter" && addTodo(e)
         }}
       />
       {todos.length ? (
@@ -21,37 +22,39 @@ const TodoList = ({
           <h1>Todo Items</h1>
           <ul className="todolist">
             {todos
-              .filter(todo => !todo.completed)
-              .map(todo => (
-                <Todo
-                  key={todo.id}
-                  todo={todo}
-                  completeTodo={completeTodo}
-                  editTodoText={editTodoText}
-                  deleteTodo={deleteTodo}
-                />
-              ))}
+              .filter((i) => !i.completed)
+              .map((todo) => {
+                return (
+                  <Todo
+                    key={todo.id}
+                    todo={todo}
+                    completeTodo={completeTodo}
+                    editTodoText={editTodoText}
+                    deleteTodo={deleteTodo}
+                  />
+                )
+              })}
           </ul>
-          <h1>Completed Items</h1>
+          <h1>Completed Items </h1>
           <ul className="todolist">
             {todos
-              .filter(todo => todo.completed)
-              .map(todo => (
-                <Todo
-                  key={todo.id}
-                  todo={todo}
-                  completeTodo={completeTodo}
-                  editTodoText={editTodoText}
-                  deleteTodo={deleteTodo}
-                />
-              ))}
+              .filter((i) => i.completed)
+              .map((todo) => {
+                return (
+                  <Todo
+                    key={todo.id}
+                    todo={todo}
+                    completeTodo={completeTodo}
+                    editTodoText={editTodoText}
+                    deleteTodo={deleteTodo}
+                  />
+                )
+              })}
           </ul>
         </>
       ) : (
         <h1>No Todos Added Yet</h1>
       )}
     </>
-  );
-};
-
-export default TodoList;
+  )
+}

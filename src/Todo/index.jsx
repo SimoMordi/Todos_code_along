@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useState } from "react"
 
-const Todo = ({ todo, completeTodo, editTodoText, deleteTodo }) => {
-  const [showInput, setShowInput] = useState(false);
-  
+export default function Todo({ todo, completeTodo, editTodoText, deleteTodo }) {
+  const [showInput, setShowInput] = useState(false)
   return (
     <li>
       <div className="left">
         <h2
-          onClick={() => {
-            setShowInput(!showInput);
+          onClick={(e) => {
+            setShowInput(!showInput)
           }}
         >
           {todo.text}
@@ -18,8 +17,8 @@ const Todo = ({ todo, completeTodo, editTodoText, deleteTodo }) => {
           type="text"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              editTodoText(todo.id, e.target.value); // We need to send the value of the input.
-              setShowInput(false);
+              editTodoText(todo.id, e)
+              setShowInput(false)
             }
           }}
         />
@@ -29,20 +28,19 @@ const Todo = ({ todo, completeTodo, editTodoText, deleteTodo }) => {
         <input
           type="checkbox"
           checked={todo.completed}
-          onChange={() => {
-            completeTodo(todo.id);
+          onChange={(e) => {
+            completeTodo(todo.id, e)
           }}
         />
       </label>
       <button
-        onClick={() => {
-          deleteTodo(todo.id);
+        checked={todo.completed}
+        onClick={(e) => {
+          deleteTodo(todo.id)
         }}
       >
         Delete Todo
       </button>
     </li>
-  );
+  )
 }
-
-export default Todo;
